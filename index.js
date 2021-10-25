@@ -10,10 +10,19 @@ app.get("/", (request, response) => {
     var lang = "JavaScript";
     var exibirMsg = true;
 
-    response.render("index",{
+    var produtos = [
+        { nome: "Doritos", preco: 3.14 },
+        { nome: "Coca-Cola", preco: 5.00 },
+        { nome: "Leite", preco: 1.45 }
+    ]
+
+
+
+    response.render("index", {
         nome: nome,
         lang: lang,
-        msg: exibirMsg
+        msg: exibirMsg,
+        produtos: produtos
     });
 });
 
