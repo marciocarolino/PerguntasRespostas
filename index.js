@@ -8,10 +8,12 @@ app.set('view engine', 'ejs');
 app.get("/", (request, response) => {
     var nome = "Marcio";
     var lang = "JavaScript";
+    var exibirMsg = true;
 
     response.render("index",{
         nome: nome,
-        lang: lang
+        lang: lang,
+        msg: exibirMsg
     });
 });
 
