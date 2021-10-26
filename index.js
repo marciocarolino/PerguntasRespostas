@@ -4,6 +4,9 @@ const app = express();
 //EJS
 app.set('view engine', 'ejs');
 
+//public
+app.use(express.static('public'));
+
 
 app.get("/", (request, response) => {
     var nome = "Marcio";
@@ -15,8 +18,6 @@ app.get("/", (request, response) => {
         { nome: "Coca-Cola", preco: 5.00 },
         { nome: "Leite", preco: 1.45 }
     ]
-
-
 
     response.render("index", {
         nome: nome,
