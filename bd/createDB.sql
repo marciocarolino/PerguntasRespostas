@@ -1,1 +1,1 @@
-create database projetofinaldb;
+create database guiaperguntas;
