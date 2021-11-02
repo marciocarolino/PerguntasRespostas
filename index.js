@@ -27,7 +27,11 @@ app.use(express.static('public'));
 
 
 app.get("/", (request, response) => {
-    response.render("index");
+    Pergunta.findAll({ raw: true }).then(perguntas => {
+        response.render("index", {
+            perguntas: perguntas
+        });
+    });
 });
 
 app.get("/perguntar", (request, response) => {
