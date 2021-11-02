@@ -27,7 +27,8 @@ app.use(express.static('public'));
 
 
 app.get("/", (request, response) => {
-    Pergunta.findAll({ raw: true }).then(perguntas => {
+    Pergunta.findAll({ raw: true, order: [
+        ['id','DESC' ]  ]}).then(perguntas => {
         response.render("index", {
             perguntas: perguntas
         });
