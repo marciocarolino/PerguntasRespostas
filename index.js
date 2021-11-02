@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyparser = require("body-parser");
 const connection = require("./database/database");
+const Pergunta = require("./database/Pergunta");
 
 //connection db
 connection
@@ -36,9 +37,16 @@ app.get("/perguntar", (request, response) => {
 app.post("/salvarpergunta", (request, response) => {
     var titulo = request.body.titulo;
     var descricao = request.body.descricao;
-    response.send("Formulário recebido!!" + titulo + "========" + descricao);
-});
+    Pergunta.create({
+        titulo: titulo,
+        descricao: descricao
+    }).then(() => {
+        response.redirect("/");
+    }).catch((error) => {
+        console.log(error);
+    })
 
+});
 
 app.listen(3000, () => {
     console.log("Servidor rodando com sucesso!!!");
