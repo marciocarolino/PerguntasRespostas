@@ -27,8 +27,10 @@ app.use(express.static('public'));
 
 
 app.get("/", (request, response) => {
-    Pergunta.findAll({ raw: true, order: [
-        ['id','DESC' ]  ]}).then(perguntas => {
+    Pergunta.findAll({
+        raw: true, order: [
+            ['id', 'DESC']]
+    }).then(perguntas => {
         response.render("index", {
             perguntas: perguntas
         });
@@ -50,8 +52,24 @@ app.post("/salvarpergunta", (request, response) => {
     }).catch((error) => {
         console.log(error);
     })
-
 });
+
+app.get("/pergunta/:id", (request, response) => {
+    var id = request.params.id;
+    Pergunta.findOne({
+        where: { id: id }
+    }).then(pergunta => {
+        if (pergunta != undefined) {
+            response.render("pergunta");
+        } else {
+            response.redirect("/");
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+});
+
+
 
 app.listen(3000, () => {
     console.log("Servidor rodando com sucesso!!!");
